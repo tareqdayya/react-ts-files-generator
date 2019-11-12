@@ -1,0 +1,25 @@
+import React, { Component } from 'react';
+import './PLACEHOLDER.STYLESHEETEXTENSION';
+import { connect } from 'react-redux';
+
+type Props = {};
+type State = {};
+
+class PLACEHOLDER extends Component<Props, State> {
+  render() {
+    return (
+      <>
+
+      </>
+    );
+  }
+}
+
+//const mapStateToProps = (state: any) => {
+//   return {
+//
+//   };
+//};
+
+export default PLACEHOLDER;
+// export default connect(mapStateToProps)(PLACEHOLDER);
