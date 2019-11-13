@@ -8,11 +8,11 @@ for RN:
 ${YOUR_COMPONENT_NAMe}Styles.ts
 
 ###### INSTALLATION:
-`yarn add @tareqdayya/react-ts-component-generator --dev`
+`yarn add @tareqdayya/react-ts-files-generator --dev`
 
 or 
 
-`npm i @tareqdayya/react-ts-component-generator --save-dev`
+`npm i @tareqdayya/react-ts-files-generator --save-dev`
 
 ###### HOW TO USE:
 on the command line:
