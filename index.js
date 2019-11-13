@@ -7,6 +7,7 @@ const path = require('path');
 const inquirer = require('inquirer');
 
 let componentName = '';
+let isReactNative = false;
 let styleSheetExtension = 'css';
 let targetPath = './src/components';
 
@@ -17,18 +18,24 @@ inquirer
   {
     type: 'input',
     name: 'styleSheetExtension',
-    message: 'whats stylesheet preprocessor are u using? (leave empty for css)'
+    message: 'whats stylesheet preprocessor are u using? (leave empty for css for web, and ts for RN)'
   },
   {
     type: 'input',
     name: 'finalPath',
     message: 'what\'s the path to the folder? (leave empty for ./src/components)'
   },
+  {
+    type: 'input',
+    name: 'isReactNative',
+    message: 'enter y if this is for react native, otherwise press enter. '
+  },
 ])
 .then(answers => {
   componentName = answers['componentName'];
   if (answers['styleSheetExtension']) styleSheetExtension = answers['styleSheetExtension'];
   if (answers['finalPath']) targetPath = answers['finalPath'];
+  if (answers['isReactNative'] === 'y') isReactNative = true;
   main();
 });
 
@@ -74,7 +81,18 @@ function main() {
       path.join(__dirname, 'templates', 'index.txt'),
       path.join(__dirname, 'templates', 'styleSheet.txt'),
     ];
+
     const finalFileNames = [`${componentName}.tsx`, 'index.tsx', `${componentName}.${styleSheetExtension}`];
+
+    if (isReactNative) {
+      if (styleSheetExtension === 'css') styleSheetExtension = 'ts';
+
+      templatePaths.pop();
+      templatePaths.push(path.join(__dirname, 'templates', 'reactNativeStyleSheet.txt'));
+
+      finalFileNames.pop();
+      finalFileNames.push(`${componentName}Styles.${styleSheetExtension}`);
+    }
 
     for (let i = 0; i < templatePaths.length; i++) {
       const templatePath = templatePaths[i];

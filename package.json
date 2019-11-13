@@ -4,7 +4,7 @@
   "description": "generates directories with react components, index, and stylesheet files inside",
   "main": "index.js",
   "scripts": {
-    "genComp": "node index.js",
+    "gencomp": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "tareq",

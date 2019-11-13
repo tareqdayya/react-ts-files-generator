@@ -14,13 +14,14 @@ or
 ###### HOW TO USE:
 on the command line:
 
-`gencomp`
+`yarn gencomp`
 
-you will get asked 3 questions:
+you will get asked 4 questions:
 
 `? whats ur component name?`<br />     
 `? whats stylesheet preprocessor are u using? (leave empty for css)`<br />     
 `? what's the path to the folder (leave empty for ./src/components)?`<br />   
+`? enter y if this is for react native, otherwise press enter. `<br />   
 
 
 if you leave the path to the folder empty, make sure you're working directory is the
