@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import './PLACEHOLDER.STYLESHEETEXTENSION';
+import './{{STYLESHEET_FILENAME}}.{{STYLESHEET_EXTENSION}}';
 import { connect } from 'react-redux';
 
 type Props = {};
 type State = {};
 
-class PLACEHOLDER extends Component<Props, State> {
+class {{COMPONENT_NAME}} extends Component<Props, State> {
   render() {
     return (
       <>
@@ -21,5 +21,5 @@ class PLACEHOLDER extends Component<Props, State> {
 //   };
 //};
 
-export default PLACEHOLDER;
-// export default connect(mapStateToProps)(PLACEHOLDER);
+export default {{COMPONENT_NAME}};
+// export default connect(mapStateToProps)({{COMPONENT_NAME}});

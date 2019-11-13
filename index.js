@@ -5,6 +5,7 @@ const fsWrite = promisify(fs.writeFile);
 const fsRead = promisify(fs.readFile);
 const path = require('path');
 const inquirer = require('inquirer');
+const mustache = require('mustache');
 
 let componentName = '';
 let isReactNative = false;
@@ -77,9 +78,9 @@ function main() {
 
   (async function pipeTemplateToFile() {
     const templatePaths = [
-      path.join(__dirname, 'templates', 'reactTemplate.txt'),
+      path.join(__dirname, 'templates', 'reactComponentTemplate.txt'),
       path.join(__dirname, 'templates', 'index.txt'),
-      path.join(__dirname, 'templates', 'styleSheet.txt'),
+      path.join(__dirname, 'templates', 'reactWebStyleSheet.txt'),
     ];
 
     const finalFileNames = [`${componentName}.tsx`, 'index.tsx', `${componentName}.${styleSheetExtension}`];
@@ -99,28 +100,15 @@ function main() {
 
       const template = await readFile(templatePath);
 
-      const words = template.split(' ');
-
-      for (let wordIndex = 0; wordIndex < words.length; wordIndex++) {
-
-        // replace placeholders with component name + stylesheet extension
-        const placeHolders = ['PLACEHOLDER', 'STYLESHEETEXTENSION'];
-        placeHolders.forEach((placeholder, placeHolderIndex) => {
-          if (words[wordIndex].includes(placeholder)) {
-            const split = words[wordIndex].split(placeholder);
-            let replacer = placeHolderIndex === 1 ? styleSheetExtension : componentName;
-            if (isReactNative && placeHolderIndex === 0 && split[1][0] === '.') replacer = componentName + 'Styles';
-            // css: use spinal names
-            if (templatePathIndex === 2 && !isReactNative) words[wordIndex] = split[0] + convertCamelCaseToSpinal(
-              replacer) + split[1];
-            else words[wordIndex] = split[0] + replacer + split[1];
-          }
+      const output = mustache.render(template,
+        {
+          COMPONENT_NAME: componentName,
+          STYLESHEET_FILENAME: componentName + (isReactNative ? 'Styles' : ''),
+          STYLESHEET_EXTENSION: styleSheetExtension,
+          WEB_CLASS_NAME: convertCamelCaseToSpinal(componentName),
         });
-      }
 
-      const rejoined = words.join(' ');
-
-      writeFiletoDir(targetDir, finalFileNames[templatePathIndex], rejoined);
+      writeFiletoDir(targetDir, finalFileNames[templatePathIndex], output);
     }
   })();
 }

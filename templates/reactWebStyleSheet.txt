@@ -1,0 +1,3 @@
+.{{WEB_CLASS_NAME}} {
+
+}

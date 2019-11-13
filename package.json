@@ -10,7 +10,8 @@
   "author": "tareq",
   "license": "MIT",
   "dependencies": {
-    "inquirer": "^7.0.0"
+    "inquirer": "^7.0.0",
+    "mustache": "^3.1.0"
   },
   "bin": {
     "gencomp": "./index.js"
