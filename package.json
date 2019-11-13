@@ -1,6 +1,6 @@
 {
   "name": "@tareqdayya/react-ts-files-generator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "generates directories with react components, index, and stylesheet files inside",
   "main": "index.js",
   "scripts": {
