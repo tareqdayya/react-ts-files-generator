@@ -17,7 +17,7 @@ or
 ###### HOW TO USE:
 on the command line:
 
-`yarn gencomp`
+`yarn gencomp` or `npm gencomp` 
 
 you will get asked 4 questions:
 
