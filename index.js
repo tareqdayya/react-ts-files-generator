@@ -28,7 +28,7 @@ inquirer
   {
     type: 'input',
     name: 'isReactNative',
-    message: 'enter y if this is for react native, otherwise press enter. '
+    message: 'enter y if this is for react native, otherwise press enter: '
   },
 ])
 .then(answers => {
@@ -94,32 +94,33 @@ function main() {
       finalFileNames.push(`${componentName}Styles.${styleSheetExtension}`);
     }
 
-    for (let i = 0; i < templatePaths.length; i++) {
-      const templatePath = templatePaths[i];
+    for (let templatePathIndex = 0; templatePathIndex < templatePaths.length; templatePathIndex++) {
+      const templatePath = templatePaths[templatePathIndex];
 
       const template = await readFile(templatePath);
 
-      const arr = template.split(' ');
+      const words = template.split(' ');
 
-      for (let j = 0; j < arr.length; j++) {
-        const word = arr[j];
+      for (let wordIndex = 0; wordIndex < words.length; wordIndex++) {
 
         // replace placeholders with component name + stylesheet extension
         const placeHolders = ['PLACEHOLDER', 'STYLESHEETEXTENSION'];
-        placeHolders.forEach((placeholder, k) => {
-          if (word.includes(placeholder)) {
-            const split = arr[j].split(placeholder);
-            const replacer = k === 1 ? styleSheetExtension : componentName;
+        placeHolders.forEach((placeholder, placeHolderIndex) => {
+          if (words[wordIndex].includes(placeholder)) {
+            const split = words[wordIndex].split(placeholder);
+            let replacer = placeHolderIndex === 1 ? styleSheetExtension : componentName;
+            if (isReactNative && placeHolderIndex === 0 && split[1][0] === '.') replacer = componentName + 'Styles';
             // css: use spinal names
-            if (i === 2) arr[j] = split[0] + convertCamelCaseToSpinal(replacer) + split[1];
-            else arr[j] = split[0] + replacer + split[1];
+            if (templatePathIndex === 2 && !isReactNative) words[wordIndex] = split[0] + convertCamelCaseToSpinal(
+              replacer) + split[1];
+            else words[wordIndex] = split[0] + replacer + split[1];
           }
         });
       }
 
-      const rejoined = arr.join(' ');
+      const rejoined = words.join(' ');
 
-      writeFiletoDir(targetDir, finalFileNames[i], rejoined);
+      writeFiletoDir(targetDir, finalFileNames[templatePathIndex], rejoined);
     }
   })();
 }
