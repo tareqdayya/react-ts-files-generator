@@ -1,6 +1,6 @@
 {
   "name": "@tareqdayya/react-ts-files-generator",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "generates directories with react components, index, and stylesheet files inside",
   "main": "index.js",
   "scripts": {
@@ -16,5 +16,7 @@
   "bin": {
     "gencomp": "./index.js"
   },
-  "publishConfig": { "registry": "https://npm.pkg.github.com/" }
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  }
 }
