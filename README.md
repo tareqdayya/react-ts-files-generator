@@ -2,7 +2,10 @@ This package automates generation of React Components in typescript.
 Using command line, you will be able to create a folder that includes the following files:  
 index.tsx   
 ${YOUR_COMPONENT_NAME}.tsx   
+for web:
 ${YOUR_COMPONENT_NAMe}.scss // or css or any format you specify through the command line  
+for RN:
+${YOUR_COMPONENT_NAMe}Styles.ts
 
 ###### INSTALLATION:
 `yarn add react-ts-component-generator --dev`
