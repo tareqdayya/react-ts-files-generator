@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import './{{STYLESHEET_FILENAME}}.{{STYLESHEET_EXTENSION}}';
 import { connect } from 'react-redux';
 
-type Props = {};
-type State = {};
-
 class {{COMPONENT_NAME}} extends Component<Props, State> {
+  const {} = this.props;
+
   render() {
     return (
       <>
@@ -15,11 +14,14 @@ class {{COMPONENT_NAME}} extends Component<Props, State> {
   }
 }
 
+type Props = {};
+type State = {};
+
 //const mapStateToProps = (state: any) => {
 //   return {
 //
 //   };
 //};
 
-export default {{COMPONENT_NAME}};
 // export default connect(mapStateToProps)({{COMPONENT_NAME}});
+export default {{COMPONENT_NAME}};

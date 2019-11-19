@@ -1,0 +1,32 @@
+import React, { FC, useEffect } from 'react';
+import './{{STYLESHEET_FILENAME}}.{{STYLESHEET_EXTENSION}}';
+import { connect } from 'react-redux';
+
+const {{COMPONENT_NAME}}: FC<Props> = (props: Props) => {
+  const {} = props;
+
+  // mounting and un-mounting
+  useEffect(() => {
+
+    // returned function will be called on component unmount
+    return () => {}
+  }, []);
+
+  return (
+    <>
+
+    </>
+  );
+};
+
+type Props = {};
+
+// const mapStateToProps = (state: any) => {
+//   return {
+//
+//   };
+// };
+
+// export default connect(mapStateToProps)({{COMPONENT_NAME}});
+export default {{COMPONENT_NAME}};
+

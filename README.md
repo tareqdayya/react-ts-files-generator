@@ -19,14 +19,8 @@ on the command line:
 
 `yarn gencomp` or `npm gencomp` 
 
-you will get asked 4 questions:
+you will get asked a few questions about your component and styles files and the target path*.
 
-`? whats ur component name?`<br />     
-`? whats stylesheet preprocessor are u using? (leave empty for css)`<br />     
-`? what's the path to the folder (leave empty for ./src/components)?`<br />   
-`? enter y if this is for react native, otherwise press enter. `<br />   
-
-
-if you leave the path to the folder empty, make sure you're working directory is the
+* if you leave the 'path to the folder' empty, make sure you're working directory is the
 root directory, otherwise you have to explicitly specify the path towards the directory.
 
