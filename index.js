@@ -8,6 +8,7 @@ const inquirer = require('inquirer');
 const mustache = require('mustache');
 
 let componentName = '';
+let isFunctionComponent = false;
 let isReactNative = false;
 let styleSheetExtension = 'css';
 let targetPath = './src/components';
@@ -15,7 +16,8 @@ let targetPath = './src/components';
 // get component name and css preprocessor
 inquirer
 .prompt([
-  { type: 'input', name: 'componentName', message: 'whats ur component name?' },
+  { type: 'input', name: 'componentName', message: 'whats your component\'s name?' },
+  { type: 'input', name: 'isFunction', message: 'enter y to create a function component, otherwise press enter: ' },
   {
     type: 'input',
     name: 'styleSheetExtension',
@@ -34,6 +36,7 @@ inquirer
 ])
 .then(answers => {
   componentName = answers['componentName'];
+  if (answers['isFunction'] && answers['isFunction'] === 'y') isFunctionComponent = true;
   if (answers['styleSheetExtension']) styleSheetExtension = answers['styleSheetExtension'];
   if (answers['finalPath']) targetPath = answers['finalPath'];
   if (answers['isReactNative'] === 'y') isReactNative = true;
@@ -77,8 +80,10 @@ function main() {
   }
 
   (async function pipeTemplateToFile() {
+    const componentTemplate = isFunctionComponent ? 'reactFunctionalComponentTemplate.txt' : 'reactComponentTemplate.txt';
+
     const templatePaths = [
-      path.join(__dirname, 'templates', 'reactComponentTemplate.txt'),
+      path.join(__dirname, 'templates', componentTemplate),
       path.join(__dirname, 'templates', 'index.txt'),
       path.join(__dirname, 'templates', 'reactWebStyleSheet.txt'),
     ];
