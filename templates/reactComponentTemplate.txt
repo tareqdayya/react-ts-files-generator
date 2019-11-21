@@ -3,9 +3,10 @@ import './{{STYLESHEET_FILENAME}}.{{STYLESHEET_EXTENSION}}';
 import { connect } from 'react-redux';
 
 class {{COMPONENT_NAME}} extends Component<Props, State> {
-  const {} = this.props;
 
   render() {
+  const {} = this.props;
+
     return (
       <>
 
