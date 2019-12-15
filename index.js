@@ -9,19 +9,29 @@ const mustache = require('mustache');
 
 let componentName = '';
 let isFunctionComponent = false;
-let isReactNative = false;
 let styleSheetExtension = 'css';
+let hasTestFile = false;
 let targetPath = './src/components';
+let isReactNative = false;
 
 // get component name and css preprocessor
 inquirer
 .prompt([
   { type: 'input', name: 'componentName', message: 'whats your component\'s name?' },
-  { type: 'input', name: 'isFunction', message: 'enter y to create a function component, otherwise press enter: ' },
+  {
+    type: 'input',
+    name: 'isFunction',
+    message: 'is this a function component? (y for yes, or press enter) : '
+  },
   {
     type: 'input',
     name: 'styleSheetExtension',
-    message: 'whats stylesheet preprocessor are u using? (leave empty for css for web, and ts for RN)'
+    message: 'whats stylesheet preprocessor are u using? (leave empty for css for web and ts for RN)'
+  },
+  {
+    type: 'input',
+    name: 'hasTestFile',
+    message: 'Do you want to generate a test file? (y for yes, or press enter) : ',
   },
   {
     type: 'input',
@@ -31,15 +41,16 @@ inquirer
   {
     type: 'input',
     name: 'isReactNative',
-    message: 'enter y if this is for react native, otherwise press enter: '
+    message: 'is this a react native component? (y for yes, or press enter) : '
   },
 ])
 .then(answers => {
   componentName = answers['componentName'];
   if (answers['isFunction'] && answers['isFunction'] === 'y') isFunctionComponent = true;
   if (answers['styleSheetExtension']) styleSheetExtension = answers['styleSheetExtension'];
+  if (answers['hasTestFile'] && answers['hasTestFile'].toLowerCase() === 'y') hasTestFile = true;
   if (answers['finalPath']) targetPath = answers['finalPath'];
-  if (answers['isReactNative'] === 'y') isReactNative = true;
+  if (answers['isReactNative'] && answers['isReactNative'].toLowerCase() === 'y') isReactNative = true;
   main();
 });
 
@@ -98,6 +109,11 @@ function main() {
 
       finalFileNames.pop();
       finalFileNames.push(`${componentName}Styles.${styleSheetExtension}`);
+    }
+
+    if (hasTestFile) {
+      templatePaths.push(path.join(__dirname, 'templates', 'testTemplate.txt'));
+      finalFileNames.push(`${componentName}.test.tsx`);
     }
 
     for (let templatePathIndex = 0; templatePathIndex < templatePaths.length; templatePathIndex++) {
