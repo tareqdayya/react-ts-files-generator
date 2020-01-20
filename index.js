@@ -6,6 +6,7 @@ const fsRead = promisify(fs.readFile);
 const path = require('path');
 const inquirer = require('inquirer');
 const mustache = require('mustache');
+const mkdirp = require('mkdirp');
 
 let componentName = '';
 let isFunctionComponent = false;
@@ -58,7 +59,7 @@ async function readFile(path) {
   return await fsRead(path, 'utf-8');
 }
 
-async function writeFiletoDir(dir, fileName, content) {
+async function writeFileToDir(dir, fileName, content) {
   await fsWrite(path.join(dir, fileName), content);
 }
 
@@ -86,11 +87,7 @@ function convertCamelCaseToSpinal(string) {
 function main() {
   const targetDir = path.join(process.cwd(), targetPath, componentName);
 
-  if (!fs.existsSync(targetDir)) {
-    fs.mkdirSync(targetDir);
-  }
-
-  (async function pipeTemplateToFile() {
+  async function pipeTemplateToFile() {
     const componentTemplate = isFunctionComponent ? 'reactFunctionalComponentTemplate.txt' : 'reactComponentTemplate.txt';
 
     const templatePaths = [
@@ -129,9 +126,16 @@ function main() {
           WEB_CLASS_NAME: convertCamelCaseToSpinal(componentName),
         });
 
-      writeFiletoDir(targetDir, finalFileNames[templatePathIndex], output);
+      writeFileToDir(targetDir, finalFileNames[templatePathIndex], output);
     }
-  })();
+  }
+
+  if (!fs.existsSync(targetDir)) {
+    mkdirp(targetDir, (err) => {
+      if (err) return console.error(err);
+      pipeTemplateToFile();
+    });
+  } else return pipeTemplateToFile();
 }
 
 
