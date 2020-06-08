@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import './{{STYLESHEET_FILENAME}}.{{STYLESHEET_EXTENSION}}';
+import{{EXPLICIT_STYLESHEET_IMPORT}} './{{STYLESHEET_FILENAME}}{{STYLESHEET_EXTENSION}}';
 import { connect } from 'react-redux';
 
 class {{COMPONENT_NAME}} extends Component<Props, State> {
 
   render() {
-  const {} = this.props;
+    const {} = this.props;
 
     return (
       <>

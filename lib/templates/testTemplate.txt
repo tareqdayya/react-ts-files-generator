@@ -1,0 +1,24 @@
+import React from 'react';
+import {{COMPONENT_NAME}} from './{{COMPONENT_NAME}}';
+import { shallow } from 'enzyme';
+
+const mockInputs = {};
+const mockOutputs = {};
+
+describe.skip('{{COMPONENT_NAME}}', () => {
+  describe('What are we testing?', () => {
+    it('should pass smoke test', async () => {
+      wrapper = shallow(<{{COMPONENT_NAME}} />);
+      expect(wrapper).not.toBeEmptyRender();
+      wrapper.unmount();
+    });
+  });
+
+  describe('Snapshot Test', () => {
+    it('should match', async () => {
+      const tree = renderer.create(<{{COMPONENT_NAME}} />);
+      expect(tree.toJSON()).toMatchSnapshot();
+      tree.unmount();
+    });
+  });
+});

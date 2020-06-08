@@ -7,10 +7,8 @@ This package **automates the generation of React/RN Components in typescript**.
 
 ##### 1- index.tsx   
 ##### 2- ArticleTitle.tsx   
-##### 3- a style file: <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;• for web: ArticleTitle.scss  
-&nbsp;&nbsp;&nbsp;&nbsp;• for RN: ArticleTitleStyles.ts <br/>
-PS: You can control which extension your styling files are.
+##### 3- a style file: You can choose one of the following options: 
+    'CSS'| 'SCSS'| 'Less'| 'Sass'| 'React Native Style'| 'Styled Components'.
 ##### 4- an optional test file: ArticleTitle.test.tsx
 
 -----------
@@ -34,5 +32,6 @@ on the command line:
 You will get asked a few questions, answer them. <br/>
 Boilerplate code generated :) <br/>
 
-* If the path to the files doesn't exist, the package will create the directories for you.
+* If the path to the files doesn't exist, worry not––the package will create the directories for
+ you.
 
