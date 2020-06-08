@@ -1,100 +1,24 @@
 import React from 'react';
-import Connected{{COMPONENT_NAME}}, { {{COMPONENT_NAME}} } from './{{COMPONENT_NAME}}';
-import { applyMiddleware, createStore } from 'redux';
-import { Provider } from 'react-redux';
-import { mount, shallow } from 'enzyme';
-import thunk from 'redux-thunk';
-import prettyFormat from 'pretty-format';
+import {{COMPONENT_NAME}} from './{{COMPONENT_NAME}}';
+import { shallow } from 'enzyme';
 
 const mockInputs = {};
 const mockOutputs = {};
 
-// mockImplementation Must be put outside of tests once and can be over-written inside tests.
-/*jest.mock('path/to/module');
-(request.get as jest.Mock).mockImplementation(async () => new Promise<any>((resolve, reject) => {
-  // delay response to simulate network requests
-  setTimeout(() => {
-    resolve({});
-  }, 100);
-}));*/
-
-let store: any;
-let wrapper: any;
-
-// new store and shallow wrapper
-beforeEach(() => {
-  store = createStore(
-    rootReducer,
-    applyMiddleware(thunk),
-  );
-
-  wrapper = shallow(
-    <{{COMPONENT_NAME}}
-      dispatch={store.dispatch}
-    />,
-  );
-});
-// reset store, unmount wrapper & clear mocks
-afterEach(async () => {
-  store = undefined;
-  if (wrapper) wrapper.unmount();
-
-  //(request.get as jest.Mock).mockClear();
-});
-
-describe.skip('shallow render', () => {
-  it('should pass smoke test', async () => {
+describe.skip('{{COMPONENT_NAME}}', () => {
+  describe('What are we testing?', () => {
+    it('should pass smoke test', async () => {
+      wrapper = shallow(<{{COMPONENT_NAME}} />);
+      expect(wrapper).not.toBeEmptyRender();
+      wrapper.unmount();
+    });
   });
 
-  it('should * after setState of *', async () => {
-
-  });
-
-  it('should * after setProps of *', async () => {
-
-  });
-});
-
-describe.skip('event handlers', () => {
-  it('should * after triggering event *', async () => {
-    // wrapper.find('#').simulate('');
-  });
-});
-
-describe.skip('redux', () => {
-  let response: any;
-  // dispatch thunk
-  beforeEach(async () => {
-    if (wrapper) wrapper.unmount();
-    // (request.get as jest.Mock).mockClear();
-
-    // response = await store.dispatch();
-  });
-
-  it('should thunk dispatch action *', async () => {
-    // expect(request.get).toHaveBeenCalledTimes(1);
-    // const expectedAction = YOUR_DISPATCH_ACTION(mockOutputs.SOMETHING);
-
-    // check thunk response
-    // expect(response).toEqual(expectedAction);
-  });
-
-  it('should select *', async () => {
-    // expect(YOUR_SELECTOR(store.getState())).toEqual(mockOutputs.SOMETHING);
-  });
-});
-
-describe.skip('full mount', () => {
-  beforeEach(async () => {
-    wrapper = mount(<Provider store={store}><Connected{{COMPONENT_NAME}} /></Provider>);
-  });
-
-  it('should render * after dispatching *', async () => {
-    // await store.dispatch();
-
-    expect(wrapper.exists()).toBeTrue();
-    // expect(wrapper.find('#').text()).toEqual(mockOutputs.SOMETHING);
-    // expect(wrapper.find('{{COMPONENT_NAME}}').at(0).state('STATE_KEY')).toEqual(SOME_VALUE);
-    // expect(wrapper.find('{{COMPONENT_NAME}}').at(0).prop('PROP_KEY')).toEqual(SOME_VALUE);
+  describe('Snapshot Test', () => {
+    it('should match', async () => {
+      const tree = renderer.create(<{{COMPONENT_NAME}} />);
+      expect(tree.toJSON()).toMatchSnapshot();
+      tree.unmount();
+    });
   });
 });
