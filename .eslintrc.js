@@ -5,7 +5,7 @@ module.exports = {
         node: true,
     },
     extends: [
-        'standard', 'eslint'
+        'standard', 'eslint',
     ],
     parserOptions: {
         ecmaVersion: 11,
@@ -19,7 +19,7 @@ module.exports = {
         strict: 'off',
         'valid-jsdoc': 'off',
         'comma-dangle': ['error', {
-            arrays: 'never',
+            arrays: 'always-multiline',
             objects: 'always-multiline',
             imports: 'always-multiline',
             exports: 'always-multiline',

@@ -1,8 +1,16 @@
 #!/usr/bin/env node
 const inquirer = require('inquirer');
 const writeFile = require('./lib/writeFile');
+const { stylesheetType } = require('./lib/constants');
 
-const styleSheetTypes = ['CSS', 'SCSS', 'Less', 'Sass', 'React Native Style', 'Styled Components'];
+const styleSheetTypes = [
+    { name: 'CSS', value: { extension: 'css', type: stylesheetType.cssBased } },
+    { name: 'SCSS', value: { extension: 'scss', type: stylesheetType.cssBased } },
+    { name: 'Less', value: { extension: 'less', type: stylesheetType.cssBased } },
+    { name: 'Sass', value: { extension: 'sass', type: stylesheetType.cssBased } },
+    { name: 'React Native Style', value: { extension: 'ts', type: stylesheetType.reactNative } },
+    { name: 'Styled Components', value: { extension: 'ts', type: stylesheetType.styledComponents } },
+];
 
 // PROMPT
 inquirer
@@ -29,12 +37,6 @@ inquirer
             name: 'finalPath',
             message: 'what\'s the path to the folder? (leave empty for ./src/components)',
         },
-        {
-            type: 'confirm',
-            name: 'isReactNative',
-            message: 'is this a react native component?',
-            default: false,
-        }
     ])
     .then(answers => writeFile(
         answers.componentName,
@@ -42,5 +44,4 @@ inquirer
         !!answers.isFunction,
         answers.styleSheetExtension,
         !!answers.hasTestFile,
-        !!answers.isReactNative,
     ));

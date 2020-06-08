@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from 'react';
-import './{{STYLESHEET_FILENAME}}.{{STYLESHEET_EXTENSION}}';
+import{{EXPLICIT_STYLESHEET_IMPORT}} './{{STYLESHEET_FILENAME}}{{STYLESHEET_EXTENSION}}';
 
 const {{COMPONENT_NAME}}: FC<Props> = (props: Props) => {
   const {} = props;
